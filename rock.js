@@ -5,79 +5,76 @@ function getComputerChoice() {
     return choice;
 }
 
-
+let result = document.querySelector(".result");
+let score = document.querySelector(".score");
 
 function playRound(pSelection, comSelection) {
-    console.log(pSelection);
-    console.log(comSelection);
     
     if (pSelection.toLowerCase() == "rock"){
         switch (comSelection) {
             case "rock":
-                console.log("Rock ties with rock");
+                result.innerText = "Rock ties with rock";
                 return 0;
                 break;
             
             case "paper":
-                console.log("You lose. Paper beats rock.");
+                result.innerText ="You lose. Paper beats rock.";
                 return -1;
                 break;
 
             case "scissors":
-                console.log("You win. Rock beats scissors");
+                result.innerText = "You win. Rock beats scissors";
                 return 1;
         }
     } else if (pSelection.toLowerCase() == "paper") {
         switch (comSelection) {
             case "rock":
-                console.log("You win. Paper beats rock");
+                result.innerText = "You win. Paper beats rock";
                 return 1;
                 break;
             
             case "paper":
-                console.log("Paper ties with paper");
+                result.innerText = "Paper ties with paper";
                 return 0;
                 break;
 
             case "scissors":
-                console.log("You lose. Scissors beats paper.");
+                result.innerText = "You lose. Scissors beats paper.";
                 return -1;
         }
     } else if (pSelection.toLowerCase() == "scissors") {
         switch (comSelection) {
             case "rock":
-                console.log("You lose. Rock beats scissors");
+                result.innerText = "You lose. Rock beats scissors";
                 return -1;
                 break;
             
             case "paper":
-                console.log("You win. Scissors beats paper.");
+                result.innerText ="You win. Scissors beats paper.";
                 return 1;
                 break;
 
             case "scissors":
-                console.log("Tie");
+                result.innerText ="Tie";
                 return 0;
         }
     }
 }
 
-
+let pScore = 0, comScore = 0;
 
 function game() {
-    let pScore = 0, comScore = 0;
-    for (let i = 0; i < 5; i++) {
-
-        let pSelection = prompt("Enter choice");
+        let pSelection = this.innerText;
         let comSelection = getComputerChoice();
         let gameResult = playRound(pSelection, comSelection);
+        
         if (gameResult == 1) pScore++;
         else if (gameResult == -1) comScore++;
-        console.log(`Player:${pScore} Computer:${comScore}`);
-    }
-    if (comScore > pScore) console.log("You lost to the computer");
-    else if (pScore > comScore) console.log("You won");
-    else console.log("It's a tie");
+    score.innerText = `Player Score: ${pScore}  
+    Computer Score: ${comScore}`;
+   
 }
 
-game();
+let buttons = document.querySelectorAll("button");
+buttons.forEach(button => button.addEventListener("click",
+game));
